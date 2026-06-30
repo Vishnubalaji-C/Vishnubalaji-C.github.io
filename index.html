@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishnu Balaji C — Portfolio</title>
+<style>
+:root{
+  --bg:#FAF9F6;
+  --panel:#FFFFFF;
+  --ink:#1B1F23;
+  --ink-soft:#4B5258;
+  --muted:#8A9098;
+  --line:#E6E3DC;
+  --accent:#1E4D3A;       /* deep pine */
+  --accent-soft:#E7EFE9;
+  --gold:#A98344;         /* muted brass */
+  --serif:"Source Serif 4","Georgia",serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent-soft); color:var(--accent);}
+a{color:inherit; text-decoration:none;}
+p{color:var(--ink-soft); margin:0;}
+
+.wrap{max-width:980px; margin:0 auto; padding:0 32px;}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(250,249,246,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:980px; margin:0 auto; padding:18px 32px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.nav-mark{font-family:var(--serif); font-size:24px; font-weight:600; letter-spacing:.01em;}
+.nav-links{display:flex; gap:28px; font-size:13px; color:var(--ink-soft);}
+.nav-links a{position:relative; padding-bottom:2px;}
+.nav-links a:hover{color:var(--accent);}
+
+.nav-toggle{
+  display:none;
+  background:none; border:none; cursor:pointer;
+  padding:6px; gap:5px; flex-direction:column;
+}
+.nav-toggle span{
+  display:block; width:22px; height:2px; background:var(--ink);
+  transition:transform .25s ease, opacity .25s ease;
+}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+@media (max-width:720px){
+  .nav-links{
+    display:flex; flex-direction:column; gap:0;
+    position:fixed; top:60px; left:0; right:0;
+    background:var(--bg); border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .nav-links.open{max-height:420px;}
+  .nav-links a{
+    padding:16px 32px; border-top:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .nav-toggle{display:flex;}
+}
+
+/* ---------- hero ---------- */
+header.hero{
+  position:relative;
+  padding:80px 0 56px;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+header.hero .wrap-inner{position:relative; z-index:1;}
+.hero-eyebrow{
+  display:flex; align-items:center; gap:12px;
+  font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); font-weight:600; margin-bottom:26px;
+}
+.hero-eyebrow::before{content:""; width:30px; height:1px; background:var(--gold);}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(40px,6vw,64px);
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  max-width:760px;
+  margin:0;
+}
+.hero h1 em{font-style:italic; color:var(--accent); font-weight:500;}
+.hero-sub{
+  margin-top:18px;
+  font-size:17.5px;
+  color:var(--ink-soft);
+  max-width:580px;
+  padding-left:18px;
+  border-left:2px solid var(--gold);
+}
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:12px;
+  margin-top:26px;
+}
+.chip{
+  font-size:12.5px; color:var(--accent);
+  border:1px solid var(--accent-soft);
+  background:var(--accent-soft);
+  padding:8px 16px; border-radius:20px;
+  transition:background .2s, border-color .2s;
+}
+.chip:hover{background:#fff; border-color:var(--accent);}
+.hero-contact{
+  margin-top:30px;
+  display:flex; flex-wrap:wrap; gap:28px;
+  font-size:13.5px; color:var(--ink-soft);
+}
+.hero-contact a{border-bottom:1px solid var(--line); padding-bottom:3px; transition:color .2s, border-color .2s;}
+.hero-contact a:hover{color:var(--accent); border-color:var(--accent);}
+
+/* ---------- section structure ---------- */
+section{padding:52px 0; border-bottom:1px solid var(--line);}
+.sec-head{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:24px; margin-bottom:30px; flex-wrap:wrap;
+}
+.sec-head h2{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(26px,3.2vw,34px); color:var(--ink); margin:0;
+}
+.sec-note{font-size:14px; color:var(--muted); max-width:340px; text-align:right;}
+@media (max-width:680px){.sec-note{text-align:left;}}
+
+/* ---------- about ---------- */
+.about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:36px;}
+@media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+.about-body p{font-size:16px; color:var(--ink-soft); margin-bottom:16px;}
+.about-body strong{color:var(--ink); font-weight:600;}
+.facts{border-top:1px solid var(--line);}
+.fact-row{
+  display:flex; justify-content:space-between; gap:12px;
+  padding:14px 0; border-bottom:1px solid var(--line);
+  font-size:13.5px;
+}
+.fact-row .k{color:var(--muted);}
+.fact-row .v{color:var(--ink); text-align:right; font-weight:500;}
+
+/* ---------- skills ---------- */
+.skill-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+@media (max-width:680px){.skill-grid{grid-template-columns:1fr;}}
+.skill-block{background:var(--panel); padding:22px 26px; transition:box-shadow .25s ease, transform .25s ease;}
+.skill-block:hover{box-shadow:0 12px 28px -16px rgba(30,77,58,.25); transform:translateY(-2px);}
+.skill-block h3{
+  font-family:var(--serif); font-style:italic; font-weight:500;
+  font-size:16px; color:var(--accent); margin:0 0 14px;
+}
+.skill-block ul{margin:0; padding:0; list-style:none;}
+.skill-block li{
+  font-size:14px; color:var(--ink-soft);
+  padding:8px 0; border-top:1px solid var(--line);
+}
+.skill-block li:first-child{border-top:none;}
+
+/* ---------- experience / projects cards ---------- */
+.entry{
+  display:grid; grid-template-columns:200px 1fr; gap:36px;
+  padding:22px 28px; border-top:1px solid var(--line);
+  margin:0 -28px;
+  border-radius:6px;
+  transition:background .25s ease;
+}
+.entry:hover{background:var(--panel);}
+.entry:first-of-type{border-top:none;}
+@media (max-width:700px){.entry{grid-template-columns:1fr; gap:10px; padding:28px 16px; margin:0 -16px;}}
+.entry-meta{font-size:13px; color:var(--muted);}
+.entry-meta .org{color:var(--accent); font-weight:600; margin-top:4px; font-size:14px;}
+.entry-title{
+  font-family:var(--serif); font-weight:600; font-size:19px; color:var(--ink);
+  margin-bottom:10px;
+}
+.entry p.lede{font-size:14.5px; color:var(--ink-soft); margin-bottom:12px;}
+.entry ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+.entry ul li{margin-bottom:7px;}
+.entry ul li::marker{color:var(--gold);}
+.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+.tag{
+  font-size:11.5px; color:var(--accent);
+  border:1px solid var(--accent-soft); padding:4px 10px; border-radius:14px;
+}
+
+/* ---------- credentials columns ---------- */
+.cred-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:30px;}
+@media (max-width:700px){.cred-grid{grid-template-columns:1fr;}}
+.cred-col h3{
+  font-family:var(--serif); font-style:italic; font-weight:500;
+  font-size:15px; color:var(--gold); margin:0 0 16px;
+}
+.cred-col ul{margin:0; padding:0; list-style:none;}
+.cred-col li{
+  font-size:13.5px; color:var(--ink-soft);
+  padding:10px 0; border-top:1px solid var(--line);
+}
+.cred-col li:first-child{border-top:none;}
+
+.paper-card{
+  background:var(--accent-soft); border:1px solid var(--line);
+  border-radius:4px; padding:24px 26px; margin-top:24px;
+}
+.paper-card .label{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:10px;}
+.paper-card .title{font-family:var(--serif); font-weight:600; font-size:18px; color:var(--ink); margin-bottom:14px;}
+.paper-card ul{margin:0; padding-left:18px; font-size:14px; color:var(--ink-soft);}
+.paper-card ul li{margin-bottom:6px;}
+
+/* ---------- footer / contact ---------- */
+footer{padding:52px 0 40px;}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:22px;}
+@media (max-width:600px){.contact-grid{grid-template-columns:1fr;}}
+.contact-item{border-top:1px solid var(--line); padding-top:14px;}
+.contact-item .k{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:6px;}
+.contact-item .v{font-size:15.5px; color:var(--ink);}
+.contact-item a:hover{color:var(--accent);}
+.foot-bottom{
+  margin-top:36px; padding-top:18px; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-size:12.5px; color:var(--muted);
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
+.reveal.show{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;}}
+
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">Vishnu Balaji C</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#academics">Academics</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap wrap-inner">
+    <div class="hero-eyebrow">Information Technology Engineer · Honors in Computer Science</div>
+    <h1>Designing the interface between <em>intelligent systems</em> and the people who use them.</h1>
+    <p class="hero-sub">UI/UX Designer · AI-IoT Solutions Architect · Prompt Engineer. B.Tech, Information Technology — NPR College of Engineering and Technology, Natham (2022 – 2026).</p>
+    <div class="hero-meta">
+      <span class="chip">React.js / Next.js</span>
+      <span class="chip">Figma — Advanced</span>
+      <span class="chip">ESP32 / Arduino</span>
+      <span class="chip">Prompt Engineering</span>
+      <span class="chip">Manual Testing</span>
+    </div>
+    <div class="hero-contact">
+      <a href="tel:+918072044568">+91-8072044568</a>
+      <a href="mailto:vishnubalajiit@gmail.com">vishnubalajiit@gmail.com</a>
+      <a href="https://linkedin.com/in/vishnu-balaji-c" target="_blank" rel="noopener">linkedin.com/in/vishnu-balaji-c</a>
+      <a href="https://github.com/Vishnubalaji-C" target="_blank" rel="noopener">github.com/Vishnubalaji-C</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="about">
+    <div class="sec-head reveal">
+      <h2>Career Philosophy &amp; Objective</h2>
+      <p class="sec-note">A full-stack architect in training — equally fluent in hardware constraints and human behavior.</p>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-body">
+        <p>As an aspiring Information Technology professional with a specialized Honors track in Computer Science, my career is driven by the <strong>convergence of human-centric design and autonomous systems</strong>. I aim to bridge the gap between complex backend logic (IoT/AI) and intuitive frontend experiences (UI/UX).</p>
+        <p>My objective is to secure a challenging role in an organization that values <strong>"Innovation through Research."</strong> I bring a unique blend of Manual Testing precision, Prompt Engineering efficiency, and IoT hardware-software integration skills. I am dedicated to evolving into a full-stack architect who can lead digital transformation projects from the ground up.</p>
+      </div>
+      <div class="facts">
+        <div class="fact-row"><span class="k">Degree</span><span class="v">B.Tech, Information Technology</span></div>
+        <div class="fact-row"><span class="k">Honors</span><span class="v">Computer Science (AI / ML / DSA)</span></div>
+        <div class="fact-row"><span class="k">CGPA</span><span class="v">8.6 CGPA</span></div>
+        <div class="fact-row"><span class="k">Duration</span><span class="v">2022 – 2026</span></div>
+        <div class="fact-row"><span class="k">Location</span><span class="v">Dindigul, Tamil Nadu, IN</span></div>
+        <div class="fact-row"><span class="k">Languages</span><span class="v">English, Tamil, Telugu</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head reveal">
+      <h2>Comprehensive Technical Skills Matrix</h2>
+      <p class="sec-note">Five disciplines, one connected practice.</p>
+    </div>
+    <div class="skill-grid reveal">
+      <div class="skill-block">
+        <h3>A — Programming &amp; Development Environment</h3>
+        <ul>
+          <li>Primary Language: Java (OOP, Data Structures, Exception Handling)</li>
+          <li>Secondary Language: Python (Scripting, Automation, Pandas, NumPy)</li>
+          <li>Frontend: HTML5, CSS3, JavaScript (ES6+), React.js, Next.js (App Router), Tailwind CSS, TypeScript</li>
+          <li>Backend &amp; Databases: Node.js, MySQL, PostgreSQL, Firebase (Auth &amp; Realtime DB)</li>
+          <li>IDE &amp; Version Control: VS Code, GitHub</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>B — UI/UX Design &amp; Digital Creativity</h3>
+        <ul>
+          <li>Design Tools: Figma (Advanced), Adobe XD, Canva</li>
+          <li>Core Skills: User Research, Persona Building, Information Architecture</li>
+          <li>Wireframing (Low &amp; High-Fidelity), Prototyping, Usability Testing, Color Theory</li>
+          <li>Design Standards: Responsive Design, Material Design</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>C — AI &amp; Prompt Engineering</h3>
+        <ul>
+          <li>LLM Mastery: ChatGPT-4, Claude 3.5, Google Gemini</li>
+          <li>Development AI: V0 Vercel, GitHub Copilot — rapid prototyping &amp; refactoring</li>
+          <li>Logic Design: System instructions, multi-turn conversational agents</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>D — IoT &amp; Embedded Systems</h3>
+        <ul>
+          <li>Hardware: ESP32, Arduino Uno/Mega, NodeMCU</li>
+          <li>Sensors/Actuators: Soil Moisture, pH, NPK, Ultrasonic, Relays/Motors</li>
+          <li>Connectivity: MQTT, HTTP, cloud integration for real-time monitoring</li>
+        </ul>
+      </div>
+      <div class="skill-block" style="grid-column:1 / -1;">
+        <h3>E — Networking &amp; Quality Assurance</h3>
+        <ul>
+          <li>Manual Testing Specialist: Regression Testing, Smoke Testing, Bug Reporting</li>
+          <li>Networking: CCNAv7 Fundamentals (Routing, Switching, Wireless Essentials)</li>
+          <li>Data Analysis: Power BI — Interactive Dashboards &amp; Analytical Reports</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head reveal">
+      <h2>Professional Internship Experience</h2>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Mar 24 – Apr 17, 2026<div class="org">The Mind IT, Trichy</div></div>
+      <div>
+        <div class="entry-title">Cybersecurity Intern</div>
+        <p class="lede">Project Focus: Network vulnerability assessment, secure communication protocols, and threat vectors.</p>
+        <ul>
+          <li>Performed routine systems security audits, configured secure rulesets for local network infrastructures, and studied mechanisms to detect system exploits.</li>
+          <li>Output: Designed and documented security mitigation recommendations for enterprise network nodes to avoid common data vulnerabilities.</li>
+          <li>Skill Gained: Practical understanding of enterprise security controls, network penetration concepts, and encryption frameworks.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Jun 19 – Jul 19, 2025 (30 Days)<div class="org">Techvolt Software Pvt. Ltd, Coimbatore</div></div>
+      <div>
+        <div class="entry-title">UI/UX Design Intern</div>
+        <p class="lede">Project Focus: Modernizing legacy web interfaces into mobile-responsive layouts.</p>
+        <ul>
+          <li>Methodology: Applied "Design Thinking" to identify user pain points in E-commerce navigation.</li>
+          <li>Output: Created a complete Figma project file containing 25+ screens, including a documented Design System for developer hand-off.</li>
+          <li>Skill Gained: Mastery of Figma's "Auto-Layout" and "Components" features to build scalable design libraries.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Aug 1 – Aug 15, 2024 (15 Days)<div class="org">Gateway Software Solution, Coimbatore</div></div>
+      <div>
+        <div class="entry-title">Embedded Systems &amp; IoT Intern</div>
+        <p class="lede">Project Focus: Developing low-cost automation nodes.</p>
+        <ul>
+          <li>Hands-on circuit assembly on breadboards and PCBs. Programmed Arduino sketches for multi-sensor data logging.</li>
+          <li>Output: Designed a prototype for an automated light-sensing system with threshold-based triggers.</li>
+          <li>Skill Gained: Deep understanding of analog-to-digital conversion and hardware debugging.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head reveal">
+      <h2>Extensive Technical Project Portfolio</h2>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Final Year Project<div class="org">Role: Team Leader</div></div>
+      <div>
+        <div class="entry-title">GiveWay — An Adaptive Traffic Equity System</div>
+        <p class="lede">Objective: To implement a smart, multi-agent urban traffic management system that guarantees dynamic green-time fairness and emergency vehicle pre-emption.</p>
+        <ul>
+          <li>Hardware &amp; Architecture: Programmed microcontrollers with real-time multi-sensor inputs. Embedded computer vision pipelines for physical lane density computation.</li>
+          <li>Core Innovation: PCE-Weighted Computer Vision, RFID emergency preemption protocols for immediate ambulance bypass, and ultrasonic/camera-based ghost lane detection to eliminate empty lane green-light allocations.</li>
+          <li>Outcome: Peer-reviewed, patented-design architecture, published at an international conference (ICSIET 2026).</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Computer Vision</span><span class="tag">RFID</span><span class="tag">Multi-Agent Systems</span></div>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Project 1</div>
+      <div>
+        <div class="entry-title">Soil Management App — IoT + AI Integration</div>
+        <p class="lede">Objective: To solve the challenge of imprecise fertilization in rural farming.</p>
+        <ul>
+          <li>Hardware Architecture: ESP32 as the central processing node; integrated Soil Moisture, pH, and NPK sensors for comprehensive data collection.</li>
+          <li>Software Architecture: Developed a Next.js dashboard to visualize live data streams.</li>
+          <li>Impact: Presented at CMTI Bangalore, receiving recognition for the innovative "AI-Consultant" feature for farmers.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">ESP32</span><span class="tag">Next.js</span><span class="tag">NPK Sensors</span></div>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Project 2</div>
+      <div>
+        <div class="entry-title">PlayerPick — AI-Powered Cricket Intelligence Platform</div>
+        <p class="lede">Objective: To revolutionize player selection for domestic and franchise cricket through data science.</p>
+        <ul>
+          <li>Data Engineering: Scraped and cleaned historical performance data using Python (Pandas).</li>
+          <li>AI Engine: Built a predictive model to estimate player "Impact Scores" based on venue, opposition type, and current form.</li>
+          <li>UI/UX: Designed an "Executive War Room" interface in Figma for team owners to use during live auctions.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Python</span><span class="tag">React</span><span class="tag">PostgreSQL</span></div>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Project 3</div>
+      <div>
+        <div class="entry-title">FinGuard Ledger — Family Expense Ecosystem</div>
+        <p class="lede">Objective: To provide a secure, local-first alternative to cloud-based finance apps.</p>
+        <ul>
+          <li>Architecture: Standalone Progressive Web App (PWA) using Next.js.</li>
+          <li>Logic: Custom Java-based calculation engine for complex interest and debt-payoff projections.</li>
+          <li>Security: Local encryption for sensitive financial data to ensure user privacy.</li>
+          <li>User Interface: Focused on "Inclusive Design" for elderly family members — high-readability fonts and simplified navigation.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">Next.js PWA</span><span class="tag">Java</span><span class="tag">Local Encryption</span></div>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">Project 4<div class="org">3rd Prize, Innovation Club</div></div>
+      <div>
+        <div class="entry-title">SheGuard Analysis — Critical Safety Application</div>
+        <p class="lede">Objective: To provide a fail-safe safety net for women in emergency situations.</p>
+        <ul>
+          <li>Functionality: Engineered a "Zero-Touch" SOS trigger with real-time GPS broadcast to verified contacts and local authorities.</li>
+          <li>Analytics: Data layer to analyze "Safe Zones" in the city based on historical incident reports.</li>
+          <li>UI Focus: High-stress usability design — the most critical features accessible within a single tap.</li>
+        </ul>
+        <div class="tag-row"><span class="tag">GPS</span><span class="tag">Safety Analytics</span><span class="tag">High-Stress UX</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="academics">
+    <div class="sec-head reveal">
+      <h2>Academic Profile &amp; Industrial Visits</h2>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">2022 – 2026</div>
+      <div>
+        <div class="entry-title">B.Tech, Information Technology</div>
+        <p class="lede">NPR College of Engineering and Technology, Natham</p>
+        <ul>
+          <li>Honors Specialization: Computer Science (Advanced AI, ML, and Data Structures). Current Performance: 8.6 CGPA.</li>
+          <li>Key Coursework: Design and Analysis of Algorithms, Database Management Systems, Computer Networks, Software Engineering, Object-Oriented Programming, AI and Machine Learning.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">2022<br>Class XII</div>
+      <div>
+        <div class="entry-title">Higher Secondary Education</div>
+        <p class="lede">Equitas Gurukul Matric Higher Secondary School, Dindigul</p>
+        <ul><li>Stream: Mathematics and Computer Science. Performance: 471 / 600 (78.5%).</li></ul>
+      </div>
+    </div>
+
+    <div class="entry reveal">
+      <div class="entry-meta">2020<br>Class X</div>
+      <div>
+        <div class="entry-title">Secondary School Education</div>
+        <p class="lede">Equitas Gurukul Matric Higher Secondary School, Dindigul</p>
+        <ul><li>Performance: 432 / 500 (86.4%).</li></ul>
+      </div>
+    </div>
+
+    <div class="skill-grid reveal" style="margin-top:10px;">
+      <div class="skill-block">
+        <h3>Industrial Visit — ISRO, Bangalore</h3>
+        <p style="font-size:14px; color:var(--ink-soft);">May 10, 2024. Explored satellite telemetry, space-grade hardware manufacturing, and the Indian space program's evolution. Observed the Satellite Assembly Center and learned about mission-critical software protocols.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Industrial Visit — Spectrums Software High Tech Solutions, Kochi</h3>
+        <p style="font-size:14px; color:var(--ink-soft);">November 15, 2024. Gained insights into the Software Development Life Cycle (SDLC) in a high-tech corporate environment. Focused on QA pipelines and cybersecurity integration in enterprise software.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="sec-head reveal">
+      <h2>Full Ledger of Certifications &amp; Achievements</h2>
+    </div>
+
+    <div class="cred-grid reveal">
+      <div class="cred-col">
+        <h3>A — Advanced Technical Certifications</h3>
+        <ul>
+          <li>Cisco: CCNAv7 — Introduction to Networks</li>
+          <li>Infosys Springboard: Power BI Data Visualization</li>
+          <li>Infosys Springboard: Ethical AI and SRE Fundamentals</li>
+          <li>IBM: Containers &amp; Kubernetes Essentials</li>
+          <li>Great Learning: Python for Data Science</li>
+          <li>Great Learning: Linux Tutorial and HTML/CSS Foundations</li>
+          <li>Simplilearn: Introduction to Figma for UX Designers</li>
+          <li>Simplilearn: Adobe XD Fundamentals</li>
+        </ul>
+      </div>
+      <div class="cred-col">
+        <h3>B — Digital Marketing &amp; Professional Strategy</h3>
+        <ul>
+          <li>Google Digital Garage: Fundamentals of Digital Marketing (26-module course)</li>
+          <li>LinkedIn Learning: Digital Marketing Foundations</li>
+          <li>LinkedIn Learning: SEO Content Writing and Social Media Strategy</li>
+          <li>LinkedIn Learning: Facebook and LinkedIn Marketing Excellence</li>
+          <li>HP Life: Resume Writing and Professional Interviewing Skills</li>
+        </ul>
+      </div>
+      <div class="cred-col">
+        <h3>C — AI &amp; Prompt Engineering Specialist Credentials</h3>
+        <ul>
+          <li>LinkedIn Learning: Introduction to Prompt Engineering for Generative AI</li>
+          <li>Advanced AI Academy: Multi-modal Prompting with ChatGPT and Gemini</li>
+          <li>AI Agent Specialization: Building Autonomous Agents with Claude and GPT-4</li>
+        </ul>
+      </div>
+      <div class="cred-col">
+        <h3>D — Awards &amp; Recognition</h3>
+        <ul>
+          <li>National Recognition: Paper Presentation and Prototyping on Soil Health Monitoring at CMTI Bangalore (AgriTech Hackathon Finalist)</li>
+          <li>Innovation Award: 2nd Prize in Internal Smart India Hackathon (SIH) for scalable software solutions</li>
+          <li>Research Excellence: 3rd Prize in Paper Presentation on "Women Safety Analytics" at NPRCET Innovation Club</li>
+          <li>Academic Finalist: Selected for GenAI Hackathon 2024 at KPR Institute (Intel associated)</li>
+          <li>Quiz Champion: Consistent 1st Prize winner in district-level</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="paper-card reveal">
+      <div class="label">International Conference Presentation &amp; Paper — ICSIET 2026</div>
+      <div class="title">"GiveWay ATES: An Adaptive Traffic Equity System Integrating PCE-Weighted Computer Vision, RFID Emergency Preemption, and Ghost Lane Detection"</div>
+      <ul>
+        <li>Authors: C. Vishnu Balaji, Department of Information Technology, NPR College of Engineering and Technology</li>
+        <li>Conference: International Conference on Smart Innovations in Engineering &amp; Technology (ICSIET 2026)</li>
+        <li>Organizers: NPR College of Engineering and Technology, Natham, Tamil Nadu (An Autonomous Institution, Accredited by NAAC with 'A' Grade, Affiliated to Anna University)</li>
+        <li>Affiliations &amp; Sponsors: Sponsored by SAEINDIA (Society of Automotive Engineers INDIA) and ACM Student Chapter. Peer-Reviewed.</li>
+        <li>Publication Identifiers: ISBN 978-93-5810-475-2 · Paper Code CSE 153</li>
+        <li>Presentation Date: April 28th – 29th, 2026</li>
+      </ul>
+    </div>
+
+    <div class="cred-grid reveal" style="margin-top:28px;">
+      <div class="cred-col">
+        <h3>Software Development Workshops</h3>
+        <ul>
+          <li>Hitasoft: "Web Apps to Mobile Apps: Scratch to Code"</li>
+          <li>Hitasoft: "Dive into Flutter: Setup &amp; Core Widgets"</li>
+          <li>LetsUpgrade: "Spotify Clone using React" — 5-day bootcamp</li>
+          <li>LetsUpgrade: "JavaScript Bootcamp" — ES6 &amp; DOM manipulation</li>
+        </ul>
+      </div>
+      <div class="cred-col">
+        <h3>Cybersecurity &amp; Networking Seminars</h3>
+        <ul>
+          <li>BCBUZZ Technologies: "DDoS Defence: Navigating Cybersecurity Challenges"</li>
+          <li>BCBUZZ Technologies: "Network Security: ARP Spoofing and Prevention"</li>
+          <li>ACM India Council: "Approaches for Operationalizing AI Models"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="profile">
+    <div class="sec-head reveal">
+      <h2>Leadership, Extracurriculars &amp; Personal Profile</h2>
+    </div>
+    <div class="cred-grid reveal">
+      <div class="cred-col">
+        <h3>Leadership Roles</h3>
+        <ul>
+          <li>Innovation Club Member: Active contributor to brainstorming sessions and prototype development for national-level competitions</li>
+          <li>Fine Arts Club Organizer: Managed stage events and technical coordination for cultural festivals</li>
+          <li>Technical Mentor: Frequently assists juniors in the IT department with Figma design</li>
+        </ul>
+      </div>
+      <div class="cred-col">
+        <h3>Extra-Curricular &amp; Social Involvement</h3>
+        <ul>
+          <li>Cricket: Opening Batsman and Strategic Planner — focus on strategic style analytics for team selection</li>
+          <li>Cycling: Long-distance cycling (up to 10km) for endurance and discipline</li>
+          <li>Badminton: Competitive play focusing on agility and reflexes</li>
+          <li>Safety Awareness: Voluntarily conducted sessions for elders on safety apps and digital literacy</li>
+          <li>Agri-Tech Outreach: Shared project findings with local farmers in Dindigul on soil health monitoring</li>
+        </ul>
+      </div>
+    </div>
+    <div class="paper-card reveal" style="margin-top:18px; background:var(--panel);">
+      <div class="label">Personal Profile &amp; Traits</div>
+      <ul>
+        <li>Adaptability: Proven track record of mastering complex tools within weeks</li>
+        <li>Resilience: Ability to maintain a high CGPA while simultaneously pursuing 25+ external certifications</li>
+        <li>Interpersonal Skills: Bilingual proficiency (English/Tamil) with a beginner's grasp of Telugu</li>
+        <li>Work Ethic: Strong commitment to "Responsibility" — ensuring every project is not just a demo but a documented solution</li>
+      </ul>
+      <div class="tag-row" style="margin-top:14px;">
+        <span class="tag">DOB: 24/07/2004</span>
+        <span class="tag">Nationality: Indian</span>
+        <span class="tag">Hobbies: Sports Analytics, High-Tech Documenting, Fitness Tracking</span>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="sec-head reveal">
+      <h2>Let's work together.</h2>
+      <p class="sec-note">Open to roles in IT, AI-IoT systems, UI/UX design, and prompt engineering.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-item"><div class="k">Phone</div><div class="v"><a href="tel:+918072044568">+91-8072044568</a></div></div>
+      <div class="contact-item"><div class="k">Email</div><div class="v"><a href="mailto:vishnubalajiit@gmail.com">vishnubalajiit@gmail.com</a></div></div>
+      <div class="contact-item"><div class="k">LinkedIn</div><div class="v"><a href="https://linkedin.com/in/vishnu-balaji-c" target="_blank" rel="noopener">linkedin.com/in/vishnu-balaji-c</a></div></div>
+      <div class="contact-item"><div class="k">GitHub</div><div class="v"><a href="https://github.com/Vishnubalaji-C" target="_blank" rel="noopener">github.com/Vishnubalaji-C</a></div></div>
+      <div class="contact-item" style="grid-column:1 / -1;"><div class="k">Address</div><div class="v">DSL Mahal, 13, Natham Road, Kullanampatti, Dindigul-3, Tamil Nadu, 624003</div></div>
+    </div>
+    <div class="foot-bottom">
+      <span>Place: Dindigul · Date: 09/01/2026</span>
+      <span>— Vishnu Balaji C —</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); } });
+},{threshold:0.1});
+revealEls.forEach(el=>io.observe(el));
+
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', ()=>{
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open', isOpen);
+  navToggle.setAttribute('aria-expanded', isOpen);
+});
+navLinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  });
+});
+</script>
+
+</body>
+</html>
